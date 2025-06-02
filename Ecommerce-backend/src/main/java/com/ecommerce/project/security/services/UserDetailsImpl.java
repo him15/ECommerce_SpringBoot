@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @NoArgsConstructor
 @Data
 public class UserDetailsImpl implements UserDetails {
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L; // used for serialization in java -> act as a unique identifier
 
     private Long id;
 
@@ -28,7 +28,7 @@ public class UserDetailsImpl implements UserDetails {
     @JsonIgnore
     private String password;
 
-    private Collection<? extends GrantedAuthority> authorities;
+    private Collection<? extends GrantedAuthority> authorities; // collection roles of authority
 
     public UserDetailsImpl(Long id, String username, String email, String password,
                            Collection<? extends GrantedAuthority> authorities) {

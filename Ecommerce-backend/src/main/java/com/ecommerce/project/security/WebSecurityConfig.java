@@ -23,7 +23,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.ecommerce.project.security.jwt.AuthEntryPointJwt;
 import com.ecommerce.project.security.jwt.AuthTokenFilter;
 import com.ecommerce.project.security.services.UserDetailsServiceImpl;
-
+//class tells that ->  kaun login karega, kaise karega, kaunse API login ke bina chalengi, aur kaunse secure rahengi.
 @Configuration
 @EnableWebSecurity
 //@EnableMethodSecurity
@@ -39,12 +39,12 @@ public class WebSecurityConfig {
         return new AuthTokenFilter();
     }
 
-
+// retrive UserDetail from UserDetailService...
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
 
-        authProvider.setUserDetailsService(userDetailsService);
+        authProvider.setUserDetailsService(userDetailsService); // login ke time user ka data kaha se aaega (database se via UserDetailsServiceImpl).
         authProvider.setPasswordEncoder(passwordEncoder());
 
         return authProvider;
@@ -86,6 +86,7 @@ public class WebSecurityConfig {
         return http.build();
     }
 
+    // bypass spring security filters completely
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
         return (web -> web.ignoring().requestMatchers("/v2/api-docs",
